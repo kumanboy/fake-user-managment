@@ -10,14 +10,14 @@ export function GET(){
 //Create User
 
 export async function POST(req, res) {
-  let {id, name, age, email, password} = await req.json();
+  let {id, name, email, password} = await req.json();
 
   // Hamma malumotlar to'gri ekanligni tekshirish
-  if (!id || !name || !age || !email || !password) {
+  if (!id || !name  || !email || !password) {
     return NextResponse.json({result: "All fields are required"}, {status: 400});
   } else {
     // 	Yangi userni arrayga qo'shish
-    users.push({id, name, age, email, password});
+    users.push({id, name, email, password});
     // 	Updated data
     const updatedUsersArray = users;
     // 	Update qilingan userni JSON stringga o'zgartirish
@@ -25,7 +25,7 @@ export async function POST(req, res) {
 
     // 	db.js filega user malumotlarini qoshish
     // fs haqida so'rang
-    fs.writeFileSync("./src/app/utils/db.js",
+    fs.writeFileSync("./app/util/db.js",
         `export const users = ${updatedData}`,
         "utf-8"
     );

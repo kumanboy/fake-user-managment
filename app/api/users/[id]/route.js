@@ -2,7 +2,12 @@ import {NextResponse} from "next/server";
 import {users} from "@/app/util/db";
 import fs from "fs";
 
-
+// 2.  Specific User
+export async function  GET(_, res) {
+  const {id} = await res.params;
+  const user = users.filter((u) => u.id == id);
+  return NextResponse.json({ user }, { status: 200 });
+}
 // Login
 export async function POST(req, res) {
   let {name, email, password} = await req.json();
